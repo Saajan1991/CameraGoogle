@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Http } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { GoogleCloudVisionServiceProvider } from '../../providers/google-cloud-vision-service/google-cloud-vision-service';
 import { Observable } from 'rxjs/Observable';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { FirebaseListObservable } from 'angularfire2/database-deprecated';
+
 
 
 @Component({
@@ -14,12 +16,19 @@ import { AngularFirestore } from 'angularfire2/firestore';
 export class HomePage {
 
   public base64image: string;
-  googleCloudVisionAPIKey: "AIzaSyCAnoY5Jqqj85bXTrdGshQecHJUYg-mdOs";
-  items: Observable<any[]>;
+  items: FirebaseListObservable<any[]>;
 
-  //const visionClient = new GoogleCloudVisionServiceProvider.ImageAnnotatorClient();
-  constructor(public navCtrl: NavController, private camera: Camera, db: AngularFirestore) {
-    this.items = db.collection('items').valueChanges();
+  constructor(
+    public navCtrl: NavController,
+    private camera: Camera,
+    public http: HttpClientModule,
+    private vision: GoogleCloudVisionServiceProvider,
+    private db: AngularFireDatabase,
+  ) {
+
+    var item = db.list('items');
+    console.log(item);
+
   }
 
   takePhoto() {
@@ -33,26 +42,26 @@ export class HomePage {
 
     this.camera.getPicture(options).then((imageData) => {
       this.base64image = 'data:image/jpeg;base64,' + imageData;
-
-      var vision_api_json = {
-        "requests": [
-          {
-            "image": {
-              "content": imageData
-            },
-            "features": [
-              {
-                "type": 'LABEL_DETECTION',
-                "maxResults": 1
-              }
-            ]
-          }
-        ]
-      };
-      var file_contents = JSON.stringify(vision_api_json);
-      alert (file_contents);
+      this.vision.getLabels(imageData);
+      // var vision_api_json = {
+      //   "requests": [
+      //     {
+      //       "image": {
+      //         "content": imageData
+      //       },
+      //       "features": [
+      //         {
+      //           "type": 'LABEL_DETECTION',
+      //           "maxResults": 1
+      //         }
+      //       ]
+      //     }
+      //   ]
+      // };
+      // var file_contents = JSON.stringify(vision_api_json);
+      // alert (file_contents);
       // this.http.post('https://www.googleapis.com/upload/storage/v1/b/myBucket/o?uploadType=media' + this.googleCloudVisionAPIKey, file_contents);
-      // this.http.post('https://vision.googleapis.com/v1/images:annotate?key=' + this.googleCloudVisionAPIKey, file_contents);
+      // // this.http.post('https://vision.googleapis.com/v1/images:annotate?key=' + this.googleCloudVisionAPIKey, file_contents);
 
     }, (err) => {
       // Handle error
