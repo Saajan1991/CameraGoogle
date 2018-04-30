@@ -8,5 +8,10 @@
 
 <ion-content padding>
   The world is your oyster.
+  <ul>
+    <li class="text" *ngFor="let item of items | async">
+      {{item.name}}
+    </li>
+  </ul>
   <button ion-button (click)="takePhoto()">Take a Photo</button>
 </ion-content>

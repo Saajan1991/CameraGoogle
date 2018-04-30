@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { GoogleCloudVisionServiceProvider } from '../../providers/google-cloud-vision-service/google-cloud-vision-service';
+import { Observable } from 'rxjs/Observable';
+import { AngularFirestore } from 'angularfire2/firestore';
+
 
 @Component({
   selector: 'page-home',
@@ -11,9 +15,11 @@ export class HomePage {
 
   public base64image: string;
   googleCloudVisionAPIKey: "AIzaSyCAnoY5Jqqj85bXTrdGshQecHJUYg-mdOs";
+  items: Observable<any[]>;
 
-  constructor(public navCtrl: NavController, private camera: Camera, public http: Http) {
-
+  //const visionClient = new GoogleCloudVisionServiceProvider.ImageAnnotatorClient();
+  constructor(public navCtrl: NavController, private camera: Camera, db: AngularFirestore) {
+    this.items = db.collection('items').valueChanges();
   }
 
   takePhoto() {
@@ -27,14 +33,14 @@ export class HomePage {
 
     this.camera.getPicture(options).then((imageData) => {
       this.base64image = 'data:image/jpeg;base64,' + imageData;
-      
+
       var vision_api_json = {
-        "requests":[
+        "requests": [
           {
-            "image":{
+            "image": {
               "content": imageData
             },
-            "features":[
+            "features": [
               {
                 "type": 'LABEL_DETECTION',
                 "maxResults": 1
@@ -44,7 +50,8 @@ export class HomePage {
         ]
       };
       var file_contents = JSON.stringify(vision_api_json);
-      this.http.post('https://www.googleapis.com/upload/storage/v1/b/myBucket/o?uploadType=media'+ this.googleCloudVisionAPIKey, file_contents);
+      alert (file_contents);
+      // this.http.post('https://www.googleapis.com/upload/storage/v1/b/myBucket/o?uploadType=media' + this.googleCloudVisionAPIKey, file_contents);
       // this.http.post('https://vision.googleapis.com/v1/images:annotate?key=' + this.googleCloudVisionAPIKey, file_contents);
 
     }, (err) => {
