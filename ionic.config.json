@@ -1,0 +1,8 @@
+{
+  "name": "cameragoogle",
+  "app_id": "ea22c4fb",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
