@@ -2,13 +2,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environment';
 import 'rxjs/add/operator/map';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class GoogleCloudVisionServiceProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello GoogleCloudVisionServiceProvider Provider');   
+    console.log('Hello GoogleCloudVisionServiceProvider Provider');
 
   }
 
@@ -28,9 +28,15 @@ export class GoogleCloudVisionServiceProvider {
         }
       ]
     }
-    console.log ("success");
-    return this.http.post('https://vision.googleapis.com/v1/images:annotate?key=' + environment.firebaseConfig.googleCloudVisionAPIKey, body);
-    
+    alert("success");
+    let response = this.http.post('https://vision.googleapis.com/v1/images:annotate?key=' + environment.firebaseConfig.googleCloudVisionAPIKey, body);
+    if (response) {
+      alert(response);
     }
+    else {
+      alert("Error");
+    }
+    return response;
+  }
 
 }
