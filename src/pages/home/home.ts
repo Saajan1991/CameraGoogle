@@ -13,8 +13,6 @@ import { environment } from '../../environment';
 
 import { DataProvider } from './../../providers/data/data';
 
-import * as firebase from 'firebase';
-
 
 @Component({
   selector: 'page-home',
@@ -22,74 +20,87 @@ import * as firebase from 'firebase';
 })
 
 export class HomePage {
-  loading: any;
-  currentImage: any;
+  alert: any;
   base64image;
   downloadURL: any;
   uploadProgress: AngularFireUploadTask;
   task: any;
   ref: any;
-  files: Observable<any[]>;
+  // items: Observable<any[]>;
+  items: any;
+
 
   constructor(public navCtrl: NavController,
     private dataProvider: DataProvider,
     private alertCtrl: AlertController,
     private afStorage: AngularFireStorage,
-    private camera: Camera) {
+    private camera: Camera,
+    private vision: GoogleCloudVisionServiceProvider,
+    private db: AngularFireDatabase) {
+      this.items = db.list('items').valueChanges();
 
   }
+
+  // takePhoto() {
+
+  //   this.base64image = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Small-world-network-example.png/220px-Small-world-network-example.png";
+  //   // const options: CameraOptions = {
+  //   //   quality: 100,
+  //   //   destinationType: this.camera.DestinationType.DATA_URL,
+  //   //   //encodingType: this.camera.EncodingType.JPEG,
+  //   //   mediaType: this.camera.MediaType.PICTURE,
+  //   //   correctOrientation: true
+  //   // }
+
+  //   // this.camera.getPicture(options).then((imageData) => {
+  //   //   this.base64image = 'data:image/jpeg;base64,' + imageData;
+  //   //   this.upload(this.base64image);
+  //   //   alert("Success1");
+  //   // }, (err) => {
+  //   //   // Handle error
+  //   // });
+  // }
+
+  showAlert(message) {
+    let alert = this.alert.create({
+      title: 'Error',
+      subTitle: message,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  saveResults(imageData, results) {
+    this.items.push({ imageData: imageData, results: results})
+      .then(_ => { })
+      .catch(err => { alert(err) });
+  }
+
 
   takePhoto() {
-
-    this.base64image = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Small-world-network-example.png/220px-Small-world-network-example.png";
-    // this.base64image = this.dataURItoBlob('data:image/jpeg;base64,' + this.base64image);
-    this.upload();
-    // this.upload(this.base64image);
-    // const options: CameraOptions = {
-    //   quality: 100,
-    //   destinationType: this.camera.DestinationType.DATA_URL,
-    //   //encodingType: this.camera.EncodingType.JPEG,
-    //   mediaType: this.camera.MediaType.PICTURE,
-    //   correctOrientation: true
-    // }
-
-    // this.camera.getPicture(options).then((imageData) => {
-    // this.base64image = this.dataURItoBlob('data:image/jpeg;base64,' + imageData);
-    //   this.upload(this.base64image);
-    //   alert("Success1");
-    // }, (err) => {
-    //   // Handle error
-    // });
-  }
-
-  dataURItoBlob(dataURI) {
-    let binary = atob(dataURI.split(',')[1]);
-    let array = [];
-    for (let i = 0; i < binary.length; i++) {
-      array.push(binary.charCodeAt(i));
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 500,
+      targetWidth: 500,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.PNG,
+      mediaType: this.camera.MediaType.PICTURE
     }
-    return new Blob([new Uint8Array(array)], { type: 'image/jpeg' });
-  };
-
-  upload() {
-    if (this.base64image) {
-      const randomId = Math.random().toString(36).substring(2);
-      var uploadTask = this.afStorage.ref(randomId)
-        .child('images/uploaded.png')
-        .put(this.base64image);
-      uploadTask.then(this.onSuccess, this.onError);
-    }
+    this.camera.getPicture(options).then((imageData) => {
+      this.vision.getLabels(imageData).subscribe((result) => {
+        this.saveResults(imageData, result);
+        // .json().responses
+      }, err => {
+        alert(err);
+      });
+    }, err => {
+      alert(err);
+    });
   }
 
-  onSuccess = (snapshot) => {
-    this.currentImage = snapshot.downloadURL;
-    this.loading.dismiss();
-  }
 
-  onError = (error) => {
-    console.log('error', error);
-    this.loading.dismiss();
-  }
+  
+
 
   // upload(event) {
   //   const randomId = Math.random().toString(36).substring(2);
@@ -102,5 +113,6 @@ export class HomePage {
   //   this.uploadProgress = this.task.percentageChanges();
   //   this.downloadURL = this.task.downloadURL();
   // }
+
 
 }
