@@ -87,6 +87,7 @@ export class HomePage {
       mediaType: this.camera.MediaType.PICTURE
     }
     this.camera.getPicture(options).then((imageData) => {
+      alert("Take photo");
       this.vision.getLabels(imageData).subscribe((result) => {
         this.saveResults(imageData, result);
         alert(imageData);
