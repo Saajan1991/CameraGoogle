@@ -7,10 +7,14 @@
 </ion-header>
 
 <ion-content padding>
-  <ul>
-    <li class="text" *ngFor="let item of items | async">
-      {{item.name}}
-    </li>
-  </ul>
+ 
   <button ion-button (click)="takePhoto()">Take a Photo</button>
-</ion-content>
+
+
+
+    <label for="file">File:</label>
+    <input type="file" (change)="upload($event)" accept=".png,.jpg" />
+    <progress max="100" [value]="(uploadProgress | async)"></progress>
+    
+  </ion-content>
+
