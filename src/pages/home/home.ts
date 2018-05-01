@@ -89,6 +89,8 @@ export class HomePage {
     this.camera.getPicture(options).then((imageData) => {
       this.vision.getLabels(imageData).subscribe((result) => {
         this.saveResults(imageData, result);
+        alert(imageData);
+        alert(result);
         // .json().responses
       }, err => {
         alert(err);
