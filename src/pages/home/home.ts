@@ -71,7 +71,10 @@ export class HomePage {
   }
 
   saveResults(imageData, results) {
-    this.items.push({ imageData: imageData, results: results})
+
+    alert(JSON.stringify(results));
+    alert(imageData);
+    this.items.push({ imageData: imageData, results: JSON.stringify(results)})
       .then(_ => { })
       .catch(err => { alert(err) });
   }
