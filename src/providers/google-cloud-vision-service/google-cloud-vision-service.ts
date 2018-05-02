@@ -13,7 +13,6 @@ export class GoogleCloudVisionServiceProvider {
   }
 
   getLabels(base64Image) {
-    alert("Hello get label" + base64Image)
     let body = {
       "requests": [
         {

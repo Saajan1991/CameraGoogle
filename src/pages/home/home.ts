@@ -26,8 +26,40 @@ export class HomePage {
   uploadProgress: AngularFireUploadTask;
   task: any;
   ref: any;
-  // items: Observable<any[]>;
   items: any;
+  // items = {
+  //   "responses": [
+  //     {
+  //       "labelAnnotations": [
+  //         {
+  //           "mid": "/m/0bt9lr",
+  //           "description": "dog",
+  //           "score": 0.97346616
+  //         },
+  //         {
+  //           "mid": "/m/09686",
+  //           "description": "vertebrate",
+  //           "score": 0.85700572
+  //         },
+  //         {
+  //           "mid": "/m/01pm38",
+  //           "description": "clumber spaniel",
+  //           "score": 0.84881884
+  //         },
+  //         {
+  //           "mid": "/m/04rky",
+  //           "description": "mammal",
+  //           "score": 0.847575
+  //         },
+  //         {
+  //           "mid": "/m/02wbgd",
+  //           "description": "english cocker spaniel",
+  //           "score": 0.75829375
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // };
 
 
   constructor(public navCtrl: NavController,
@@ -79,6 +111,8 @@ export class HomePage {
     // .catch(err => { alert(err) });
     alert(this.items);
   }
+
+  
 
   takePhoto() {
     const options: CameraOptions = {
