@@ -58,13 +58,13 @@ export class HomePage {
     alert.present();
   }
 
-  saveResults(imageData, results) {
-    this.items = JSON.stringify(results);
-    // this.items.push({ imageData: imageData, results: JSON.stringify(results.response) });
-    // .then(_ => { })
-    // .catch(err => { alert(err) });
-    alert(this.items);
-  }
+  // saveResults(imageData, results) {
+  //   this.items = JSON.stringify(results);
+  //   // this.items.push({ imageData: imageData, results: JSON.stringify(results.response) });
+  //   // .then(_ => { })
+  //   // .catch(err => { alert(err) });
+  //   alert(this.items);
+  // }
 
 
   takePhoto() {
@@ -78,8 +78,10 @@ export class HomePage {
     }
     this.camera.getPicture(options).then((imageData) => {
       this.vision.getLabels(imageData).subscribe((result) => {
-        this.saveResults(imageData, result);
+        // this.saveResults(imageData, result);
         alert("Save success");
+        this.items = JSON.stringify(result);
+        alert(this.items);
         this.items1 = this.items.responses[0].labelAnnotations;
         alert(this.items1);
         // .json().responses
