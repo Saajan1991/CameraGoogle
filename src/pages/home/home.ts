@@ -40,7 +40,9 @@ export class HomePage {
     this.camera.getPicture(options).then((imageData) => {
       this.vision.getLabels(imageData).subscribe((result) => {
         this.items = JSON.stringify(result);
+        alert(this.items)
         this.items = JSON.parse(this.items);
+        alert(this.items)
         this.items1 = this.items.responses[0].faceAnnotations;
         alert(this.items1)
       }, err => {
