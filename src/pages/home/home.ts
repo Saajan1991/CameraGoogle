@@ -28,8 +28,8 @@ export class HomePage {
   ref: any;
   // items: Observable<any[]>;
   items;
-  items1: {responses: {}};
-  
+  items1: { responses: {} };
+
 
 
 
@@ -40,12 +40,12 @@ export class HomePage {
     private camera: Camera,
     private vision: GoogleCloudVisionServiceProvider,
     private db: AngularFireDatabase) {
-      if (this.items == undefined){
-        alert(this.items);
-      }
-      else{
-        // this.items = db.list('items').valueChanges();
-      }
+    if (this.items == undefined) {
+      alert(this.items);
+    }
+    else {
+      // this.items = db.list('items').valueChanges();
+    }
 
   }
 
@@ -59,8 +59,6 @@ export class HomePage {
   }
 
   saveResults(imageData, results) {
-
-    alert("save result");
     this.items = JSON.stringify(results);
     // this.items.push({ imageData: imageData, results: JSON.stringify(results.response) });
     // .then(_ => { })
@@ -79,10 +77,11 @@ export class HomePage {
       mediaType: this.camera.MediaType.PICTURE
     }
     this.camera.getPicture(options).then((imageData) => {
-      alert("Take photo");
       this.vision.getLabels(imageData).subscribe((result) => {
         this.saveResults(imageData, result);
         alert("Save success");
+        this.items1 = this.items.responses[0].labelAnnotations;
+        alert(this.items1);
         // .json().responses
       }, err => {
         alert(err);
@@ -125,8 +124,8 @@ export class HomePage {
     //     }
     //   ]
     // };
-    this.items1 = this.items.responses[0].labelAnnotations;
-  
+
+
   }
 
 
