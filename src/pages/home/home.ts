@@ -29,33 +29,26 @@ export class HomePage {
 
 
   takePhoto() {
-    console.log(this.items.responses[0]);
-    // this.items = JSON.stringify(this.items);
-    // this.items1 = JSON.parse(this.items);
-    this.items1 = this.items.responses[0].faceAnnotations;
-
-      const options: CameraOptions = {
-        quality: 100,
-        targetHeight: 500,
-        targetWidth: 500,
-        destinationType: this.camera.DestinationType.DATA_URL,
-        encodingType: this.camera.EncodingType.PNG,
-        mediaType: this.camera.MediaType.PICTURE
-      }
-      this.camera.getPicture(options).then((imageData) => {
-        this.vision.getLabels(imageData).subscribe((result) => {
-          this.items = JSON.stringify(result);
-          this.items = JSON.parse(this.items);
-          this.items1 = this.items.responses[0].faceAnnotations;
-          alert(this.items1)
-        }, err => {
-          alert(err);
-        });
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 500,
+      targetWidth: 500,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.PNG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then((imageData) => {
+      this.vision.getLabels(imageData).subscribe((result) => {
+        this.items = JSON.stringify(result);
+        this.items = JSON.parse(this.items);
+        this.items1 = this.items.responses[0].faceAnnotations;
+        alert(this.items1)
       }, err => {
         alert(err);
       });
-    }
-
+    }, err => {
+      alert(err);
+    });
   }
 
 }
