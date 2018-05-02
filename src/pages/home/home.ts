@@ -27,7 +27,7 @@ export class HomePage {
   task: any;
   ref: any;
   // items: Observable<any[]>;
-  items: any;
+  items;
 
 
 
@@ -42,26 +42,6 @@ export class HomePage {
     alert(this.items);
 
   }
-
-  // takePhoto() {
-
-  //   this.base64image = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Small-world-network-example.png/220px-Small-world-network-example.png";
-  //   // const options: CameraOptions = {
-  //   //   quality: 100,
-  //   //   destinationType: this.camera.DestinationType.DATA_URL,
-  //   //   //encodingType: this.camera.EncodingType.JPEG,
-  //   //   mediaType: this.camera.MediaType.PICTURE,
-  //   //   correctOrientation: true
-  //   // }
-
-  //   // this.camera.getPicture(options).then((imageData) => {
-  //   //   this.base64image = 'data:image/jpeg;base64,' + imageData;
-  //   //   this.upload(this.base64image);
-  //   //   alert("Success1");
-  //   // }, (err) => {
-  //   //   // Handle error
-  //   // });
-  // }
 
   showAlert(message) {
     let alert = this.alert.create({

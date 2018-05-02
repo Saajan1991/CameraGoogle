@@ -28,21 +28,19 @@
   
   <ion-content padding>
 
-    
+    <ion-item *ngFor="let label of items.responses[0].labelAnnotations">{{label.description}}</ion-item>
     
     <!-- <ion-card *ngFor="let item of items | async">
-      <img [src]="'data:image/png;base64,' + item.imageData"/> -->
+      <img [src]="'data:image/png;base64,' + item.imageData"/>
       <ion-card-content>
-        <ion-list no-lines *ngIf= "items">
-
+        <ion-list no-lines>
           <ion-list-header>Labels</ion-list-header>
-          <!-- {{items}}
-          {{items.responses[0]}}
-          {{items.responses[0].labelAnnotations}} -->
-          <ion-item  *ngFor="let label of items.responses[0].labelAnnotations">{{label.description}}</ion-item>
+          <ion-item *ngFor="let label of items.results[1].labelAnnotations | async">{{label.description}}</ion-item>
+          <ion-item *ngFor="let label of items.responses[0].labelAnnotations | async">{{label.description}}</ion-item>
+          <ion-item *ngFor="let label of items.responses.labelAnnotations | async">{{label.description}}</ion-item>
         </ion-list>
       </ion-card-content>
-    <!-- </ion-card> -->
+    </ion-card> -->
     <ion-fab bottom right>
       <button ion-fab (click)="takePhoto()">
         <ion-icon name="camera"></ion-icon>
