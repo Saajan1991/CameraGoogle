@@ -28,6 +28,8 @@ export class HomePage {
   ref: any;
   // items: Observable<any[]>;
   items;
+  items1: {responses: {}};
+  
 
 
 
@@ -38,8 +40,12 @@ export class HomePage {
     private camera: Camera,
     private vision: GoogleCloudVisionServiceProvider,
     private db: AngularFireDatabase) {
-    this.items = db.list('items').valueChanges();
-    alert(this.items);
+      if (this.items == undefined){
+        alert(this.items);
+      }
+      else{
+        // this.items = db.list('items').valueChanges();
+      }
 
   }
 
@@ -85,40 +91,42 @@ export class HomePage {
       alert(err);
     });
 
-  //   this.items = 
-  //   {
-  //     "responses": [
-  //       {
-  //         "labelAnnotations": [
-  //           {
-  //             "mid": "/m/0bt9lr",
-  //             "description": "dog",
-  //             "score": 0.97346616
-  //           },
-  //           {
-  //             "mid": "/m/09686",
-  //             "description": "vertebrate",
-  //             "score": 0.85700572
-  //           },
-  //           {
-  //             "mid": "/m/01pm38",
-  //             "description": "clumber spaniel",
-  //             "score": 0.84881884
-  //           },
-  //           {
-  //             "mid": "/m/04rky",
-  //             "description": "mammal",
-  //             "score": 0.847575
-  //           },
-  //           {
-  //             "mid": "/m/02wbgd",
-  //             "description": "english cocker spaniel",
-  //             "score": 0.75829375
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   }
+    // this.items1 = 
+    // {
+    //   "responses": [
+    //     {
+    //       "labelAnnotations": [
+    //         {
+    //           "mid": "/m/0bt9lr",
+    //           "description": "dog",
+    //           "score": 0.97346616
+    //         },
+    //         {
+    //           "mid": "/m/09686",
+    //           "description": "vertebrate",
+    //           "score": 0.85700572
+    //         },
+    //         {
+    //           "mid": "/m/01pm38",
+    //           "description": "clumber spaniel",
+    //           "score": 0.84881884
+    //         },
+    //         {
+    //           "mid": "/m/04rky",
+    //           "description": "mammal",
+    //           "score": 0.847575
+    //         },
+    //         {
+    //           "mid": "/m/02wbgd",
+    //           "description": "english cocker spaniel",
+    //           "score": 0.75829375
+    //         }
+    //       ]
+    //     }
+    //   ]
+    // };
+    this.items1 = this.items.responses[0].labelAnnotations;
+  
   }
 
 
