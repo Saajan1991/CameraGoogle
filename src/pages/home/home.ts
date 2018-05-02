@@ -3,7 +3,6 @@ import { NavController, AlertController } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { GoogleCloudVisionServiceProvider } from '../../providers/google-cloud-vision-service/google-cloud-vision-service';
-import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
@@ -50,14 +49,12 @@ export class HomePage {
     }
     this.camera.getPicture(options).then((imageData) => {
       this.vision.getLabels(imageData).subscribe((result) => {
-        // this.saveResults(imageData, result);
         alert("Save success");
         this.items = JSON.stringify(result);
         this.items = JSON.parse(this.items);
         alert(this.items);
         this.items1 = this.items.responses[0].labelAnnotations;
-        alert(this.items1);
-        // .json().responses
+        alert(this.items1 + "item to display");
       }, err => {
         alert(err);
       });
