@@ -81,6 +81,7 @@ export class HomePage {
         // this.saveResults(imageData, result);
         alert("Save success");
         this.items = JSON.stringify(result);
+        this.items = JSON.parse(this.items);
         alert(this.items);
         this.items1 = this.items.responses[0].labelAnnotations;
         alert(this.items1);
@@ -92,7 +93,7 @@ export class HomePage {
       alert(err);
     });
 
-    // this.items1 = 
+    // this.items = 
     // {
     //   "responses": [
     //     {
@@ -126,6 +127,8 @@ export class HomePage {
     //     }
     //   ]
     // };
+
+    // this.items1 = this.items.responses[0].labelAnnotations;
 
 
   }

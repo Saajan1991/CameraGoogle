@@ -29,7 +29,6 @@ export class GoogleCloudVisionServiceProvider {
     }
     let response = this.http.post('https://vision.googleapis.com/v1/images:annotate?key=' + environment.firebaseConfig.googleCloudVisionAPIKey, body);
     if (response) {
-    // response.json();
       alert(JSON.stringify(response));
     }
     else {
