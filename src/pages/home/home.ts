@@ -37,7 +37,7 @@ export class HomePage {
     private camera: Camera,
     private vision: GoogleCloudVisionServiceProvider,
     private db: AngularFireDatabase) {
-      this.items = db.list('items').valueChanges();
+    this.items = db.list('items').valueChanges();
 
   }
 
@@ -71,12 +71,13 @@ export class HomePage {
   }
 
   saveResults(imageData, results) {
-    
-    alert("save result")
-    this.items.push({ imageData: imageData, results: JSON.stringify(results.response)});
-      // .then(_ => { })
-      // .catch(err => { alert(err) });
-      alert(this.items);
+
+    alert("save result");
+    this.items = JSON.stringify(results.response);
+    // this.items.push({ imageData: imageData, results: JSON.stringify(results.response) });
+    // .then(_ => { })
+    // .catch(err => { alert(err) });
+    alert(this.items);
   }
 
 
@@ -105,7 +106,7 @@ export class HomePage {
   }
 
 
-  
+
 
 
   // upload(event) {
