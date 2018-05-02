@@ -71,9 +71,7 @@ export class HomePage {
   }
 
   saveResults(imageData, results) {
-
     alert(JSON.stringify(results));
-    alert(imageData);
     this.items.push({ imageData: imageData, results: JSON.stringify(results)})
       .then(_ => { })
       .catch(err => { alert(err) });
@@ -93,8 +91,8 @@ export class HomePage {
       alert("Take photo");
       this.vision.getLabels(imageData).subscribe((result) => {
         this.saveResults(imageData, result);
-        alert(imageData);
-        alert(result);
+        alert("Save success");
+        alert(this.items);
         // .json().responses
       }, err => {
         alert(err);
