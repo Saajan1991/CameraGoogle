@@ -21,7 +21,7 @@ export class GoogleCloudVisionServiceProvider {
           },
           "features": [
             {
-              "type": "LABEL_DETECTION"
+              "type": "FACE_DETECTION"
             }
           ]
         }
