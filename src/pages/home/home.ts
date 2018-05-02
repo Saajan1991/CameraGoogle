@@ -73,13 +73,12 @@ export class HomePage {
   saveResults(imageData, results) {
 
     alert("save result");
-    this.items = JSON.stringify(results.response);
+    this.items = JSON.stringify(results);
     // this.items.push({ imageData: imageData, results: JSON.stringify(results.response) });
     // .then(_ => { })
     // .catch(err => { alert(err) });
     alert(this.items);
   }
-
 
   takePhoto() {
     const options: CameraOptions = {
@@ -95,7 +94,6 @@ export class HomePage {
       this.vision.getLabels(imageData).subscribe((result) => {
         this.saveResults(imageData, result);
         alert("Save success");
-        alert(this.items);
         // .json().responses
       }, err => {
         alert(err);
@@ -104,8 +102,6 @@ export class HomePage {
       alert(err);
     });
   }
-
-
 
 
 
