@@ -80,7 +80,7 @@ export class HomePage {
     alert(this.items);
   }
 
-  
+
   takePhoto() {
     const options: CameraOptions = {
       quality: 100,
@@ -104,39 +104,9 @@ export class HomePage {
     });
   }
 
-// items = {
-  //   "responses": [
-  //     {
-  //       "labelAnnotations": [
-  //         {
-  //           "mid": "/m/0bt9lr",
-  //           "description": "dog",
-  //           "score": 0.97346616
-  //         },
-  //         {
-  //           "mid": "/m/09686",
-  //           "description": "vertebrate",
-  //           "score": 0.85700572
-  //         },
-  //         {
-  //           "mid": "/m/01pm38",
-  //           "description": "clumber spaniel",
-  //           "score": 0.84881884
-  //         },
-  //         {
-  //           "mid": "/m/04rky",
-  //           "description": "mammal",
-  //           "score": 0.847575
-  //         },
-  //         {
-  //           "mid": "/m/02wbgd",
-  //           "description": "english cocker spaniel",
-  //           "score": 0.75829375
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // };
+
+
+
 
   // upload(event) {
   //   const randomId = Math.random().toString(36).substring(2);
