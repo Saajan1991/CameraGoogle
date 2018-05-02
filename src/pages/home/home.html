@@ -33,12 +33,13 @@
     <!-- <ion-card *ngFor="let item of items | async">
       <img [src]="'data:image/png;base64,' + item.imageData"/> -->
       <ion-card-content>
-        <ion-list no-lines>
+        <ion-list no-lines *ngIf= "items">
+
           <ion-list-header>Labels</ion-list-header>
           {{items}}
           {{items.responses[0]}}
           {{items.responses[0].labelAnnotations}}
-          <!-- <ion-item *ngFor="let label of items.responses[0].labelAnnotations">{{label.description}}</ion-item> -->
+          <ion-item  *ngFor="let label of items.responses[0].labelAnnotations">{{label.description}}</ion-item>
         </ion-list>
       </ion-card-content>
     <!-- </ion-card> -->

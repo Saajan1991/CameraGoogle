@@ -30,6 +30,7 @@ export class HomePage {
   items: any;
 
 
+
   constructor(public navCtrl: NavController,
     private dataProvider: DataProvider,
     private alertCtrl: AlertController,
@@ -102,6 +103,41 @@ export class HomePage {
     }, err => {
       alert(err);
     });
+
+  //   this.items = 
+  //   {
+  //     "responses": [
+  //       {
+  //         "labelAnnotations": [
+  //           {
+  //             "mid": "/m/0bt9lr",
+  //             "description": "dog",
+  //             "score": 0.97346616
+  //           },
+  //           {
+  //             "mid": "/m/09686",
+  //             "description": "vertebrate",
+  //             "score": 0.85700572
+  //           },
+  //           {
+  //             "mid": "/m/01pm38",
+  //             "description": "clumber spaniel",
+  //             "score": 0.84881884
+  //           },
+  //           {
+  //             "mid": "/m/04rky",
+  //             "description": "mammal",
+  //             "score": 0.847575
+  //           },
+  //           {
+  //             "mid": "/m/02wbgd",
+  //             "description": "english cocker spaniel",
+  //             "score": 0.75829375
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   }
   }
 
 
