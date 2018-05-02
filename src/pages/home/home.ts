@@ -72,10 +72,10 @@ export class HomePage {
 
   saveResults(imageData, results) {
     
-    alert("save result" + this.items)
-    this.items.push({ imageData: imageData, results: JSON.stringify(results.response)})
-      .then(_ => { })
-      .catch(err => { alert(err) });
+    alert("save result")
+    this.items.push({ imageData: imageData, results: JSON.stringify(results.response)});
+      // .then(_ => { })
+      // .catch(err => { alert(err) });
       alert(this.items);
   }
 
