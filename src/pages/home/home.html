@@ -36,9 +36,9 @@
         <ion-list no-lines *ngIf= "items">
 
           <ion-list-header>Labels</ion-list-header>
-          {{items}}
+          <!-- {{items}}
           {{items.responses[0]}}
-          {{items.responses[0].labelAnnotations}}
+          {{items.responses[0].labelAnnotations}} -->
           <ion-item  *ngFor="let label of items.responses[0].labelAnnotations">{{label.description}}</ion-item>
         </ion-list>
       </ion-card-content>

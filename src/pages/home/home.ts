@@ -39,6 +39,7 @@ export class HomePage {
     private vision: GoogleCloudVisionServiceProvider,
     private db: AngularFireDatabase) {
     this.items = db.list('items').valueChanges();
+    alert(this.items);
 
   }
 
